@@ -1,18 +1,19 @@
 #! /usr/bin/python3
 
 import requests
+import argparse
 import sys
 
-if len(sys.argv) < 2:
-    print('syntaxe : {} <url> [<param>]'.format(sys.argv[0]))
-    print('get a webshell with url, and use <param> as command post param (by default cmd)')
-    quit()
 
-url = sys.argv[1]
-if len(sys.argv) > 2:
-    cmd = sys.argv[2]
-else:
-    cmd = 'cmd'
+parser = argparse.ArgumentParser('get a webshell with url, and use <param> as command post param (by default cmd)')
+parser.add_argument('url')
+parser.add_argument('--cmd', default='cmd')
+
+args = parser.parse_args()
+
+url = args.url
+cms = args.cmd
+
 
 s = requests.Session()
 
