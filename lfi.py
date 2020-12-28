@@ -11,6 +11,7 @@ parser.add_argument('--base64', help='use base64 php encode technique (to read p
 
 args = parser.parse_args()
 
+
 def extract(html: str) -> str:
 
     return html
@@ -22,9 +23,6 @@ def extract(html: str) -> str:
     # return content
 
 
-
-
-
 if __name__ == '__main__':
 
     # modify this to use post or evasion techniques
@@ -34,6 +32,7 @@ if __name__ == '__main__':
 
     value = extract(r.text)
 
+    # wil not work if extract function is not adapted
     if args.base64:
         print(base64.b64decode(value).decode())
     else:
