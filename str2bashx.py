@@ -12,9 +12,9 @@ def convert(data: str, double_dash=False):
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser('Convert string to bash encoded string (\x45\x20)')
-    parser.add_argument('str', help='String toi encode')
-    parser.add_argument('--double_dash', help='print double slash')
+    parser.add_argument('str', help='String to encode')
+    parser.add_argument('--double', help='print double slash', action='store_true')
 
     args = parser.parse_args()
 
-    print(convert(args.str, args.double_dash))
+    print(convert(args.str, args.double))
