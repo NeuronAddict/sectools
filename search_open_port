@@ -1,0 +1,17 @@
+#! /bin/bash -ex
+
+if [[ ${#} < 3 ]]
+then
+    echo "Try to scan all ports of a remote machine to find a one that is accessible"
+    echo "syntaxe : $0 <begin_port> <end_port> <host>"
+    exit 0
+fi
+
+begin=$1
+end=$2
+host=$3
+
+for p in $(seq $begin $end)
+do
+    nc -w 1 -nz "${host}" "${p}" &
+done
