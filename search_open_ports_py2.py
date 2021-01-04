@@ -41,6 +41,5 @@ class PortScanner:
 
 if __name__ == '__main__':
 
-    with Pool(40) as p:
-
-        p.map(PortScanner(args.host, args.debug), range(args.begin, args.end + 1))
+    p = Pool(40)
+    p.map(PortScanner(args.host, args.debug), range(args.begin, args.end + 1))
