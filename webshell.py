@@ -49,4 +49,4 @@ if cmd is not None:
 else:
     while True:
         c = input('--> ')
-        execute(c, headers, args.html2text)
+        execute(c, headers, args.html2text, args.proxy)
