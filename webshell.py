@@ -8,7 +8,7 @@ import sys
 parser = argparse.ArgumentParser('get a webshell with url, and use <param> as command post param (by default cmd)')
 parser.add_argument('--header', action='append', help='add header')
 parser.add_argument('--param', default='cmd', help='param with command to use')
-parser.add_argument('--cmd', help='command to send')
+parser.add_argument('--cmd', help='command to send, can be multiples (&& operators are not supported)', action='append')
 parser.add_argument('--html2text', action='store_true', help='print html on text mode')
 parser.add_argument('--proxy', help='use a proxy')
 parser.add_argument('url')
@@ -17,7 +17,7 @@ args = parser.parse_args()
 
 url = args.url
 param = args.param
-cmd = args.cmd
+commands = args.cmd
 
 
 def execute(cmd, headers, h2t, proxy=None):
@@ -44,8 +44,9 @@ if args.header:
         value = header[header.index(': ') + 2:]
         headers[key] = value
 
-if cmd is not None:
-    execute(cmd, headers, args.html2text, args.proxy)
+if commands is not None and len(commands) != 0:
+    for cmd in commands:
+        execute(cmd, headers, args.html2text, args.proxy)
 else:
     while True:
         c = input('--> ')
