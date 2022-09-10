@@ -78,7 +78,7 @@ if args.file:
 if commands is not None and len(commands) != 0:
     for cmd in commands:
         execute(cmd, headers, args.html2text, args.proxy, params)
-
-while True:
-    c = input('--> ')
-    execute(c, headers, args.html2text, args.proxy, params)
+else:
+    while True:
+        c = input('--> ')
+        execute(c, headers, args.html2text, args.proxy, params)
