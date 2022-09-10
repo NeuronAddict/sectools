@@ -13,6 +13,7 @@ parser.add_argument('--cmd', help='command to send, can be multiples (&& operato
 parser.add_argument('--html2text', action='store_true', help='print html on text mode')
 parser.add_argument('--proxy', help='use a proxy')
 parser.add_argument('--file', help='upload an file')
+parser.add_argument('--get', help='send param via get (instead of POST)', action='store_true')
 parser.add_argument('url')
 
 args = parser.parse_args()
@@ -31,7 +32,10 @@ def execute(cmd, headers, h2t, proxy=None, params=None):
     if proxy:
         session.proxies = {'http': proxy, 'https': proxy}
 
-    r = session.post(url, data={param: cmd} | params, headers=headers)
+    if args.get:
+        r = session.get(url, params={param: cmd} | params, headers=headers)
+    else:
+        r = session.post(url, data={param: cmd} | params, headers=headers)
 
     print(r.request.url)
 
